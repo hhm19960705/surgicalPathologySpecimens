@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	  	http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	<aop:config proxy-target-class="true"></aop:config>
+	<!-- 配置验证码的Action -->
+	<bean id="checkImgAction" class="com.sps.action.CheckImgAction"
+		scope="prototype" />
+	<!-- 配置二维码的Action -->
+	<bean id="QRCodeAction" class="com.sps.action.QRCodeAction" scope="prototype" />
+	<!-- 配置医生二维码的Action -->
+	<bean id="QRCodeDoctorAction" class="com.sps.action.QRCodeDoctorAction" scope="prototype" />
+	<!-- 配置action的类 -->
+	<bean id="userAction" class="com.sps.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="patientAction" class="com.sps.action.PatientAction"
+		scope="prototype">
+		<property name="patientService" ref="patientService"></property>
+	</bean>
+	<bean id="specimenAction" class="com.sps.action.SpecimenAction"
+		scope="prototype">
+		<property name="patientService" ref="patientService"></property>
+		<property name="specimenService" ref="specimenService"></property>
+	</bean>
+	<bean id="historyAction" class="com.sps.action.HistoryAction"
+		scope="prototype">
+		<property name="patientService" ref="patientService"></property>
+		<property name="historyService" ref="historyService"></property>
+	</bean>
+	<!-- 配置业务层的类 -->
+	<bean id="userService" class="com.sps.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="patientService" class="com.sps.service.impl.PatientServiceImpl">
+		<property name="patientDao" ref="patientDao"></property>
+	</bean>
+	<bean id="specimenService" class="com.sps.service.impl.SpecimenServiceImpl">
+		<property name="specimenDao" ref="specimenDao"></property>
+	</bean>
+	<bean id="historyService" class="com.sps.service.impl.HistoryServiceImpl">
+		<property name="historyDao" ref="historyDao"></property>
+	</bean>
+	<!-- 配置hibernate类 -->
+	<bean id="hibernateUtil" class="com.sps.util.HibernateUtil">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置dao的类 -->
+	<bean id="userDao" class="com.sps.dao.impl.UserDaoImpl">
+		<property name="hibernateUtil" ref="hibernateUtil"></property>
+	</bean>
+	<bean id="patientDao" class="com.sps.dao.impl.PatientDaoImpl">
+		<property name="hibernateUtil" ref="hibernateUtil"></property>
+	</bean>
+	<bean id="specimenDao" class="com.sps.dao.impl.SpecimenDaoImpl">
+		<property name="hibernateUtil" ref="hibernateUtil"></property>
+	</bean>
+	<bean id="historyDao" class="com.sps.dao.impl.HistoryDaoImpl">
+		<property name="hibernateUtil" ref="hibernateUtil"></property>
+	</bean>
+	<!-- 配置事物管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+	<!-- 自动加载构建bean -->
+	<context:component-scan base-package="com.sps" />
+</beans>

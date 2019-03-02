@@ -1,0 +1,98 @@
+* { margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 12px; background: rgb(9,86,85); }
+a, a:active, a:link, a:visited, a:hover { text-decoration: none; }
+a img, fieldset { border: 0; }
+ul, li { list-style: none; }
+/*doctor*/
+/*header开始*/
+header { height: 96px; 1px solid; }
+.header_top { height: 100px; border-bottom: #4684be 4px solid; repeat-x; }
+.logo { float: left; display: inline; width: 400px; height: 36px; margin: 22px 0px 0; background: url(../images/logo.png) no-repeat; }
+/*header_tip*/
+.header_tip { float: right; margin-right: 10px; height: 22px; line-height: 22px; }
+.header_tip li { float: left; height: 22px;  repeat-x; }
+.header_tip li.header_tipl { width: 11px; no-repeat; }
+.header_tip li.header_tipr { width: 11px; no-repeat; }
+.header_tip_a { float: left; color: #fff; padding-left: 24px; margin-right: 6px; }
+/*nav*/
+.nav{clear:both;  float: right;}
+.nav li{
+	 background: #808000; line-height:33px; width:87px;height:30px; border:solid 1px #dca571; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; behavior:url(js/pie.htc); cursor:pointer;}
+.nav li a{ display:block; float: left; color: #fff; padding-left: 24px; margin-right: 22px; width:87px;height:30px; }
+.nav li a.selected{position:relative; background:url(../images/navbg.png) repeat-x; line-height:30px; }
+.nav li:hover{display:block;background:#000;color:#fff;background: none repeat scroll 0% 0% rgb(235, 84, 9);}
+.nav .er{display:block; float: left; color: #fff; padding-left: 5px; margin-right: 6px; width:120px;height:30px; }
+.nav .er li a{ display:block; float: left; color: #fff; padding-left: 24px; margin-right: 22px; width:87px;height:30px; }
+.nav .er li a.selected{position:relative; background:url(../images/navbg.png) repeat-x; line-height:30px; }
+.tablelist{border:solid 1px #ebb683; width:100%; clear:both; }
+.tablelist th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #d7a372; text-indent:11px; text-align:left;}
+.tablelist td{line-height:35px; text-indent:11px; border-right: dotted 1px #F2BF74;}
+.tablelink{color:#EB5409;}
+.tablelist tbody tr.odd{background:#FFF7EA;}
+.tablelist tbody tr:hover{background:#FFDCA9;}
+.dhl{height:40px; background:url(../images/th.gif) repeat-x;} 
+.dhl span{font-weight:bold;line-height:40px; float:left; margin-left:12px;color:#080808;}
+.dh1 a{text-decoration: none;background:#9FB6CD; height:34px; line-height: 40px; text-align:left;}
+.bbdj,.bbzd,.bbjs{background:#fff;}
+.bdbh{background:#9FB6CD; height:34px; line-height: 40px; text-align:left;}
+.bbdj .select {
+     padding: 0 0 0 30px;
+    width:750px;
+}
+
+.select .left, .select .right{
+	width:50%;
+}
+/*
+ * 完美轻拂动
+ */
+.active:after{
+	clear: both;
+	display: block;
+	content: '';
+}
+
+/*
+ * IE6兼容问题的清除浮动
+ */
+.active{
+	zoom: 1;
+}
+
+/*
+ * 左浮动
+ */
+.fl{
+	float: left;
+}
+
+/*
+ * 右浮动
+ */
+.fr{
+	float: right;
+}
+.bbdj.header{
+	font-size: 17px;
+	}
+#success{
+	color:#FFF;
+	background: rgb(9,86,85);
+	}
+.sure{
+	width:120px;height:30px;
+	}
+#upload,#tj{
+	color:#FFF;
+	background: rgb(9,86,85);
+	width:120px;height:30px;
+	}
+#code{
+	width:87px;height:30px;
+}
+.bbzd tr,.bbzs tr,.bbjs tr{
+	width:120px;height:43px;
+	}
+.bbzd tr td a{ color: #000; }
+.look{width:60px;height:20px;}
+.bbzs{background:#fff;height: 100%;}
