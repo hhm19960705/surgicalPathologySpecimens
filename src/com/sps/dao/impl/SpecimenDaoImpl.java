@@ -115,34 +115,36 @@ public class SpecimenDaoImpl implements SpecimenDao {
 	}
 
 	// 分页查找全部标本根据标本核对时间降序排列
-		@SuppressWarnings({ "static-access", "unchecked" })
-		@Override
-		public List<Specimen> findByhdPage(int begin, int pageSize, String id,
-				String pid) {
-			StringBuffer hql = new StringBuffer(" from Specimen where 1=1 ");
-			if (id != null && !id.equals("")) {
-				hql.append(" and id ='" + id + "'");
-			}
-			if (pid != null && !pid.equals("")) {
-				hql.append(" and pid ='" + pid + "'");
-			}
-			hql.append("ORDER by hdtime DESC");
-			// 获取被Spring托管的session
-			session = hibernateUtil.getSession();
-			// 获取query对象
-			Query query = session.createQuery(hql.toString());
-			query.setFirstResult(begin);
-			query.setMaxResults(pageSize);
-			List<Specimen> list = query.list();
-			hibernateUtil.closeSession(session);
-			return list;
+	@SuppressWarnings({ "static-access", "unchecked" })
+	@Override
+	public List<Specimen> findByhdPage(int begin, int pageSize, String id,
+			String pid) {
+		StringBuffer hql = new StringBuffer("SELECT s.id,s.patient.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,h.czstate,h.shstate from Specimen s,History h WHERE s.history.id=h.id ");
+		if (id != null && !id.equals("")) {
+			hql.append(" and s.id ='" + id + "'");
 		}
+		if (pid != null && !pid.equals("")) {
+			hql.append(" and s.patient.pid ='" + pid + "'");
+		}
+		hql.append("ORDER by s.hdtime DESC");
+		// 获取被Spring托管的session
+		session = hibernateUtil.getSession();
+		// 获取query对象
+		Query query = session.createQuery(hql.toString());
+		query.setFirstResult(begin);
+		query.setMaxResults(pageSize);
+		List<Specimen> list = query.list();
+		hibernateUtil.closeSession(session);
+		return list;
+	}
+
 	// 分页查找未接收标本
 	@SuppressWarnings({ "static-access", "unchecked" })
 	@Override
 	public List<Specimen> findjsByPage(int begin, int pageSize, String id,
 			String pid) {
-		StringBuffer hql = new StringBuffer(" from Specimen where jsstate=0 and sstate=1 ");
+		StringBuffer hql = new StringBuffer(
+				" from Specimen where jsstate=0 and sstate=1 ");
 		if (id != null && !id.equals("")) {
 			hql.append(" and id ='" + id + "'");
 		}
@@ -165,7 +167,8 @@ public class SpecimenDaoImpl implements SpecimenDao {
 	@Override
 	public List<Specimen> findhdByPage(int begin, int pageSize, String id,
 			String pid) {
-		StringBuffer hql = new StringBuffer(" SELECT s.id,s.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,h.czstate,h.shstate FROM Specimen s,History h WHERE s.hid=h.id  ");
+		StringBuffer hql = new StringBuffer(
+				" from Specimen where hdstate=0 ");
 		if (id != null && !id.equals("")) {
 			hql.append(" and id ='" + id + "'");
 		}
@@ -260,12 +263,13 @@ public class SpecimenDaoImpl implements SpecimenDao {
 		return 0;
 	}
 
-	//分页查找未送检标本
+	// 分页查找未送检标本
 	@SuppressWarnings({ "static-access", "unchecked" })
 	@Override
 	public List<Specimen> findsjByPage(int begin, int pageSize, String id,
 			String pid) {
-		StringBuffer hql = new StringBuffer(" from Specimen where sstate=0 and hdstate=1 ");
+		StringBuffer hql = new StringBuffer(
+				" from Specimen where sstate=0 and hdstate=1 ");
 		if (id != null && !id.equals("")) {
 			hql.append(" and id ='" + id + "'");
 		}

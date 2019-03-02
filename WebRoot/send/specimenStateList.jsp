@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String context = request.getContextPath();
 %>
 <body>
+<s:debug></s:debug>
 <div class="formbody" >
   <div class="place">
     <span>位置：</span>
@@ -54,7 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <th>标本名称</th>
         <th>已核对</th>
         <th>核对时间</th>
-        <th>核对错误信息</th>
         <th>已送检</th>
         <th>送检时间</th>
         <th>核对及送检人</th>
@@ -85,21 +85,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        	 	<td><s:if test="#s.jsstate==0">否</s:if>
             		<s:elseif test="#s.jsstate==1">成功</s:elseif> 
             		<s:else>失败</s:else></td>
+            		<td><s:date name="#s.jstime" format="yyyy-MM-dd"></s:date></td>
+	        	 	<td><s:property value="#s.jsperson"></s:property></td>
             		<td><s:if test="#s.czstate==0">是</s:if>
             		<s:else>否</s:else></td>
             		<td><s:if test="#s.shstate==0">是</s:if>
             		<s:else>否</s:else></td>
-            		<td><s:if test="#s.shstate==0">是</s:if>
+	        	 	<td><s:if test="#s.shstate==0">是</s:if>
             		<s:else>否</s:else></td>
-	        	 	<td><s:date name="#s.jstime" format="yyyy-MM-dd"></s:date></td>
-	        	 	<td><s:property value="#s.jsperson"></s:property></td>
-	        	 	
-	        	 	
 	        	 	<td><s:date name="#s.time" format="yyyy-MM-dd"></s:date></td>
 	        	 	<td><s:property value="#s.location"></s:property></td>
 	        	 </tr>
 	      	</s:iterator>
-	      	   <s:iterator var="s" value="list">     
 	        </tbody>
 	    </table>
 	    
@@ -125,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </table>
 	    
 	    <script type="text/javascript">
-		$('.tablelist tbody tr:odd').addClass('odd');
+			$('.tablelist tbody tr:odd').addClass('odd');
 		</script>
         </div>
 </body>
