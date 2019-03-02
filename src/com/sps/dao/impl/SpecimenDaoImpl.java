@@ -165,7 +165,7 @@ public class SpecimenDaoImpl implements SpecimenDao {
 	@Override
 	public List<Specimen> findhdByPage(int begin, int pageSize, String id,
 			String pid) {
-		StringBuffer hql = new StringBuffer(" SELECT s.id,s.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,h.czstate,h.shstate FROM specimen s,history h WHERE s.hid=h.id  ");
+		StringBuffer hql = new StringBuffer(" SELECT s.id,s.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,h.czstate,h.shstate FROM Specimen s,History h WHERE s.hid=h.id  ");
 		if (id != null && !id.equals("")) {
 			hql.append(" and id ='" + id + "'");
 		}
