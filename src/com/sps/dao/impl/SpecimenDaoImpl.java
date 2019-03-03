@@ -1,10 +1,15 @@
 package com.sps.dao.impl;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import com.sps.dao.SpecimenDao;
+import com.sps.entity.RockObjectValue;
 import com.sps.entity.Specimen;
 import com.sps.util.HibernateUtil;
 
@@ -115,11 +120,11 @@ public class SpecimenDaoImpl implements SpecimenDao {
 	}
 
 	// 分页查找全部标本根据标本核对时间降序排列
-	@SuppressWarnings({ "static-access", "unchecked" })
+	@SuppressWarnings({ "static-access"})
 	@Override
-	public List<Specimen> findByhdPage(int begin, int pageSize, String id,
+	public List<RockObjectValue> findByhdPage(int begin, int pageSize, String id,
 			String pid) {
-		StringBuffer hql = new StringBuffer("SELECT s.id,s.patient.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,h.czstate,h.shstate from Specimen s,History h WHERE s.history.id=h.id ");
+		StringBuffer hql = new StringBuffer("SELECT s.id,s.patient.pid,s.name,s.hdstate,s.hdtime,s.sstate,s.stime,s.sperson,s.jsstate,s.jstime,s.jsperson,s.time,s.location,h.czstate,h.shstate from Specimen s,History h WHERE s.history.id=h.id ");
 		if (id != null && !id.equals("")) {
 			hql.append(" and s.id ='" + id + "'");
 		}
@@ -133,9 +138,47 @@ public class SpecimenDaoImpl implements SpecimenDao {
 		Query query = session.createQuery(hql.toString());
 		query.setFirstResult(begin);
 		query.setMaxResults(pageSize);
-		List<Specimen> list = query.list();
+		List<?> list = query.list();
+		List<RockObjectValue> rockData = new LinkedList<RockObjectValue>();
+		if(list!=null&&list.size()>0){
+			for(int i=0;i<list.size();i++){
+				Object[] object=(Object[])list.get(i);
+				String sid=(String)object[0];
+				String paid=(String)object[1];
+				String name=(String )object[2];
+				int hdstate=(int) object[3];
+				Date hdtime=(Date)object[4];
+				int  sstate=(int) object[5];
+				Date stime=(Date)object[6];
+				String sperson=(String )object[7];
+				int  jsstate=(int) object[8];
+				Date jstime=(Date)object[9];
+				String jsperson=(String )object[10];
+				Date time=(Date)object[11];
+				String location=(String)object[12];
+				int  czstate=(int) object[13];
+				int  shstate=(int) object[14];
+				RockObjectValue rockObjectValue=new RockObjectValue();
+				rockObjectValue.setId(sid);
+				rockObjectValue.setPid(paid);
+				rockObjectValue.setName(name);
+				rockObjectValue.setHdstate(hdstate);
+				rockObjectValue.setHdtime(hdtime);
+				rockObjectValue.setSstate(sstate);
+				rockObjectValue.setStime(stime);
+				rockObjectValue.setSperson(sperson);
+				rockObjectValue.setJsstate(jsstate);
+				rockObjectValue.setJstime(jstime);
+				rockObjectValue.setJsperson(jsperson);
+				rockObjectValue.setTime(time);
+				rockObjectValue.setLocation(location);
+				rockObjectValue.setCzstate(czstate);
+				rockObjectValue.setShstate(shstate);
+				rockData.add(rockObjectValue);
+;			}
+		}
 		hibernateUtil.closeSession(session);
-		return list;
+		return rockData;
 	}
 
 	// 分页查找未接收标本

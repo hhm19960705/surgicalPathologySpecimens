@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.sps.entity.PageBean;
 import com.sps.entity.Patient;
+import com.sps.entity.RockObjectValue;
 import com.sps.entity.Specimen;
 import com.sps.service.PatientService;
 import com.sps.service.SpecimenService;
@@ -66,7 +67,7 @@ public class SpecimenAction extends ActionSupport implements
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String id = request.getParameter("id");
 		String pid = request.getParameter("pid");
-		PageBean<Specimen> pageBean = specimenService.findByhdPage(currPage, id,
+		PageBean<RockObjectValue> pageBean = specimenService.findByhdPage(currPage, id,
 				pid);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "findstateAll";

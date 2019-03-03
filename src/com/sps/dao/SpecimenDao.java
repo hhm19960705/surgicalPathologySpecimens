@@ -2,6 +2,7 @@ package com.sps.dao;
 
 import java.util.List;
 
+import com.sps.entity.RockObjectValue;
 import com.sps.entity.Specimen;
 
 /**
@@ -30,7 +31,7 @@ public interface SpecimenDao {
 			String pid);
 
 	// 分页查找全部标本根据标本核对时间降序排列
-	public List<Specimen> findByhdPage(int begin, int pageSize, String id,
+	public List<RockObjectValue> findByhdPage(int begin, int pageSize, String id,
 			String pid);
 
 	// 标本个数

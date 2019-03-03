@@ -49,8 +49,8 @@ public class PageBean<T> {
 		return list;
 	}
 
-	public void setList(List<T> list) {
-		this.list = list;
+	public void setList(List<T> list2) {
+		this.list = (List<T>) list2;
 	}
 
 }

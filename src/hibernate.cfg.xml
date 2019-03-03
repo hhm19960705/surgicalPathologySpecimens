@@ -15,7 +15,7 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="myeclipse.connection.profile">surgicalPathologySpecimens</property>
     	<!-- 显示sql语句 -->
-		<property name="show_sql">true</property>
+		<property name="show_sql">false</property>
     	<!-- 自动更新 -->
 		<property name="hbm2ddl.auto">update</property>
 		<mapping resource="com/sps/entity/User.hbm.xml" />

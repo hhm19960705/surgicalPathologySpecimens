@@ -3,6 +3,7 @@ package com.sps.service;
 import java.util.List;
 
 import com.sps.entity.PageBean;
+import com.sps.entity.RockObjectValue;
 import com.sps.entity.Specimen;
 
 /**
@@ -15,7 +16,7 @@ public interface SpecimenService {
 			String pid);
 
 	// 分页查找全部标本根据标本核对时间降序排列
-	public PageBean<Specimen> findByhdPage(Integer currPage, String id,
+	public PageBean<RockObjectValue> findByhdPage(Integer currPage, String id,
 			String pid);
 
 	// 分页查找未核对标本

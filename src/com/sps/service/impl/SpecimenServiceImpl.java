@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sps.dao.SpecimenDao;
 import com.sps.entity.PageBean;
+import com.sps.entity.RockObjectValue;
 import com.sps.entity.Specimen;
 import com.sps.service.SpecimenService;
 
@@ -44,8 +45,8 @@ public class SpecimenServiceImpl implements SpecimenService {
 	
 	// 分页查找全部标本根据标本核对时间降序排列
 	@Override
-	public PageBean<Specimen> findByhdPage(Integer currPage, String id, String pid) {
-		PageBean<Specimen> pageBean = new PageBean<Specimen>();
+	public PageBean<RockObjectValue> findByhdPage(Integer currPage, String id, String pid) {
+		PageBean<RockObjectValue> pageBean = new PageBean<RockObjectValue>();
 		// 封装当前页数
 		pageBean.setCurrPage(currPage);
 		// 封装每页显示的记录数
@@ -60,7 +61,7 @@ public class SpecimenServiceImpl implements SpecimenService {
 		pageBean.setTotalPage(num.intValue());
 		// 封装每页显示的数据
 		int begin = (currPage - 1) * pageSize;
-		List<Specimen> list = specimenDao.findByhdPage(begin, pageSize, id, pid);
+		List<RockObjectValue> list = specimenDao.findByhdPage(begin, pageSize, id, pid);
 		pageBean.setList(list);
 		return pageBean;
 	}

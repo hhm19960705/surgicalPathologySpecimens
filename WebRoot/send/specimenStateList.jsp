@@ -19,7 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String context = request.getContextPath();
 %>
 <body>
-<s:debug></s:debug>
 <div class="formbody" >
   <div class="place">
     <span>位置：</span>
@@ -72,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <s:iterator var="s" value="list">       
 	        	 <tr>
 	        	 	<td><s:property value="#s.id"></s:property></td>
-	        	 	<td><s:property value="#s.patient.pid"></s:property></td>
+	        	 	<td><s:property value="#s.pid"></s:property></td>
 	        	 	<td><s:property value="#s.name"></s:property></td>
 	        	 	<td><s:if test="#s.hdstate==0">否</s:if>
             		<s:elseif test="#s.hdstate==1">成功</s:elseif> 

@@ -48,7 +48,7 @@
                 <comment>标本创建时间</comment>
             </column>
         </property>
-        <property name="sstate" type="java.lang.String">
+        <property name="sstate" type="java.lang.Integer">
             <column name="sstate">
                 <comment>送检状态：0表示未送检，1表示已送检</comment>
             </column>

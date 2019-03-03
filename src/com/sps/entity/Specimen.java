@@ -19,7 +19,7 @@ public class Specimen implements java.io.Serializable {
 	private Timestamp ctime;
 	private Timestamp ltime;
 	private Timestamp time;
-	private String sstate;
+	private Integer sstate;
 	private Timestamp stime;
 	private String sperson;
 	private Integer jsstate;
@@ -55,7 +55,7 @@ public class Specimen implements java.io.Serializable {
 	/** full constructor */
 	public Specimen(String id, Patient patient, History history, String name,
 			String type, Timestamp otime, Timestamp ctime, Timestamp ltime,
-			Timestamp time, String sstate, Timestamp stime, String sperson,
+			Timestamp time, Integer sstate, Timestamp stime, String sperson,
 			Integer jsstate, Timestamp jstime, String jsperson, String jsfalse,
 			Integer hdstate, Timestamp hdtime, String hdfalse, String location) {
 		this.id = id;
@@ -154,11 +154,11 @@ public class Specimen implements java.io.Serializable {
 		this.time = time;
 	}
 
-	public String getSstate() {
+	public Integer getSstate() {
 		return this.sstate;
 	}
 
-	public void setSstate(String sstate) {
+	public void setSstate(Integer sstate) {
 		this.sstate = sstate;
 	}
 
