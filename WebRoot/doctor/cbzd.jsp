@@ -51,6 +51,8 @@ String date= format.format(new Date());
      	<s:hidden name="shstate" value="%{model.shstate}" />
       	<s:hidden name="shperson" value="%{model.shperson}" />
      	<s:hidden name="shtime" value="%{model.shtime}" />
+     	<s:hidden name="images" value="%{model.images}" />
+     	<s:hidden name="radio" value="%{model.radio}" />
     <li><label>&nbsp;</label><input type="submit" class="btn" value="提交" /></li>
     </ul>
     </s:form>

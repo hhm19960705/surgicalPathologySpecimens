@@ -1,9 +1,13 @@
 package com.sps.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -35,6 +39,18 @@ public class HistoryAction extends ActionSupport implements
 
 	public void setCurrPage(Integer currPage) {
 		this.currPage = currPage;
+	}
+
+	private File[] files;
+	private String[] filesFileName ;
+	
+	public void setFilesFileName(String[] filesFileName) {
+		this.filesFileName = filesFileName;
+	}
+
+	
+	public void setFiles(File[] files) {
+		this.files = files;
 	}
 
 	// 注入业务层的类
@@ -70,7 +86,42 @@ public class HistoryAction extends ActionSupport implements
 	}
 
 	// 保存病例的动作
-	public String add() {
+	public String add(){
+		//遍历 files 数组
+		if(files != null){
+			//获取服务器 根目录下的upload 文件夹
+			String realPath = ServletActionContext.getServletContext().getRealPath("/upload");
+			File upload = new File(realPath) ;
+			if(!upload.exists()){
+				upload.mkdirs() ;
+			}
+			if(files.length > 0){//取图片
+				//根据父目录 和 上传的文件名创建 文件
+				File img = new File(upload, filesFileName[0]) ;
+				try {
+					//复制文件
+					FileUtils.copyFile(files[0], img);
+					//这个地方的 upload 目录 是相对路径  可以改成 /+项目绝对路径
+					history.setImages("upload/" + filesFileName[0]);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(files.length > 1){//取录音
+				//根据父目录 和 上传的文件名创建 文件
+				File radio = new File(upload, filesFileName[1]) ;
+				try {
+					//复制文件
+					FileUtils.copyFile(files[1],radio);
+					history.setRadio("upload/" + filesFileName[1]);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		historyService.save(history);
 		return "add_ok";
 	}

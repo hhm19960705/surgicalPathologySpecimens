@@ -50,6 +50,8 @@ String date= format.format(new Date());
       	<s:hidden name="czperson" value="%{model.czperson}" /> 
       	<s:hidden name="cztime" value="%{model.cztime}" />    
      	<s:hidden name="shstate" value="1" />
+     	<s:hidden name="images" value="%{model.images}" />
+     	<s:hidden name="radio" value="%{model.radio}" />
     <li><label>&nbsp;</label><input type="submit" class="btn" value="提交" /></li>
     </ul>
     </s:form>

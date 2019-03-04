@@ -36,7 +36,7 @@ $(this).removeClass('h-light');
 function openDialog()
 {
 	var sHTML = "<p><img src='<%=request.getContextPath()%>/qRCode.action?id=<s:property value="id"/>' style='width:200px;height:200px'/></p>"+
-      '<p><button onclick="window.neatDialog.close()">关闭</button></p>';
+      '<p><button onclick="window.neatDialog.close()">关闭</button><button>打印</button></p>';
     new NeatDialog(sHTML, "扫描了解详情!", false);
 }
 </script>

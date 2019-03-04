@@ -20,6 +20,12 @@
 		<action name="checkImg" class="checkImgAction"></action>
 		<action name="qRCode" class="QRCodeAction"></action>
 		<action name="qRCodeDoctor" class="QRCodeDoctorAction"></action>
+
+       <!-- 上传文件 -->
+		<action name="uploadAction" class="com.sps.action.FileUploadAction">
+			<result name="success">history_findAll.action</result>
+		</action>
+
 		<!-- 用户的Action -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="login">/login.jsp</result>

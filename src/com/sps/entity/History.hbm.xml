@@ -75,6 +75,16 @@
                 <comment>最终审核诊断时间</comment>
             </column>
         </property>
+         <property name="images" type="java.lang.String">
+            <column name="images">
+                <comment>图片路径</comment>
+            </column>
+        </property>
+         <property name="radio" type="java.lang.String">
+            <column name="radio">
+                <comment>音频路径</comment>
+            </column>
+        </property>
         <set name="specimens" inverse="true">
             <key>
                 <column name="hid" not-null="true" />
